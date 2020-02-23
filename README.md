@@ -1,4 +1,4 @@
-![Image](./Image/UvA.png)
+![Image](./data/image/UvA.png)
 # Infomation Visualization - team 36
 Project for Information Visualization
 
