@@ -1,0 +1,11 @@
+{
+  "base_url": "/user/iv/",
+  "hostname": "127.0.0.1",
+  "notebook_dir": "/home/iv",
+  "password": false,
+  "pid": 23307,
+  "port": 55073,
+  "secure": false,
+  "token": "",
+  "url": "http://127.0.0.1:55073/user/iv/"
+}

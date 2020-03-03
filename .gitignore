@@ -1,0 +1,4 @@
+.cache
+.ipython
+data/*
+.local
