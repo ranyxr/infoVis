@@ -66,17 +66,22 @@ class CrawlerThread(threading.Thread):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6',
         }
-        try:
-            r = requests.get(self.url, headers=headers)
-        except requests.exceptions.ConnectionError:
-            sleep(60)
-            r = requests.get(self.url, headers=headers)
+        max_try = 10
+        while True:
+            if max_try == 0:
+                break
+            try:
+                r = requests.get(self.url, headers=headers)
+                if r.status_code in [200, 301]:
+                    break
+                if r.status_code == 429:
+                    sleep(60)
+                if r.status_code == 404:
+                    return
+            except requests.exceptions.ConnectionError:
+                sleep(60)
 
-        if r.status_code == 429:
-            sleep(60)
-            r = requests.get(self.url, headers=headers)
-        if r.status_code == 404:
-            return
+            max_try -= 1
 
         if not self.filter_artist(r.text):
             return
