@@ -1,4 +1,6 @@
 .cache
 .ipython
-data/*
 .local
+.idea
+data/*
+
