@@ -20,5 +20,8 @@ country = 'country'
 coordinate = 'coordinate'
 country_code = 'country_code'
 
+descri = "textual_description"
 
+ner = "ner"
+token = "token"
 count = 'count'

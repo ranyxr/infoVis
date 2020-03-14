@@ -19,4 +19,7 @@ _reproductions_uri = os.path.join(DIR.raw_data, _reproductions_fnm)
 pic_info_uri = _reproductions_uri
 
 cleaned_data1_fnm = DIR.clean_data1
-cleaned_data1_fnm_uri = DIR.clean_data1
+cleaned_data1_uri = DIR.clean_data1
+
+word_cloud_data1_fnm = DIR.word_cloud_data1
+word_cloud_data1_uri = DIR.word_cloud_data1

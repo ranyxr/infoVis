@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StringType, IntegerType, LongType, ArrayType
-from pyspark.sql.functions import col, udf, explode
+from pyspark.sql.functions import col, udf, explode, sum
 from SYS import FILE, COL, Mode
 from geopy.geocoders import Nominatim
 from datetime import datetime
@@ -13,5 +13,9 @@ spark = SparkSession \
     .appName("VI") \
     .getOrCreate()
 
-# spark.read.parquet(FILE.cleaned_data1_fnm_uri).groupby(col(COL.school), col(COL.country)).count().show(1000, truncate=False)
-print(spark.read.csv(FILE.meta_data_uri, header=True).drop_duplicates([COL.o_id]).count())
+df = spark.read.parquet(FILE.word_cloud_data1_uri)\
+    .groupby(col(COL.token))\
+    .agg(sum(COL.count).alias(COL.count))\
+    .sort(col(COL.count), ascending=False)
+df.show()
+print(df.count())
