@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Grayscale - Start Bootstrap Theme</title>
+  <title>Omiart</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@
       <div class="mx-auto text-center">
         <h1 class="mx-auto my-0 text-uppercase">OmniArt</h1>
         <h2 class="text-white-50 mx-auto mt-2 mb-5">The Only Artistic Dataset You Will Ever Need!</h2>
-        <a href="#about" class="btn btn-primary js-scroll-trigger">Get Started</a>
+        <a href="#about" class="btn btn-primary js-scroll-trigger">Let's explore!</a>
       </div>
     </div>
   </header>
@@ -640,7 +640,7 @@
                 data: [
                     {
         name: 'Horizontal line with Y value at 100',
-        xAxis: 10
+        xAxis: 14
     },]}
  }
  var series_01 = {
@@ -1115,25 +1115,28 @@ var series_artiest_index_2 = {
          color: "#fff",
         //  width:
      },    
- }
- var legend_list = [stack_gene_legend]
+ };
+ var legend_list = [stack_gene_legend];
  //-------------------------Data Initialize-------------------------
+var centuries = [-109.0, -99.0, -69.0, -59.0, -54.0, -51.0, -49.0, -48.0, -44.0, -41.0, -39.0, -38.0, -35.0, -34.0, -31.0, -30.0, -29.0, -28.0, -27.0, -26.0, -25.0, -24.0, -23.0, -22.0, -21.0, -20.0, -19.0, -18.0, -17.0, -16.0, -15.0, -14.0, -13.0, -12.0, -11.0, -10.0, -9.0, -8.0, -7.0, -6.0, -5.0, -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0];
+var century_count = {'-109': 1, '-99': 4, '-69': 174, '-59': 6, '-54': 1, '-51': 2, '-49': 101, '-48': 1, '-44': 1, '-41': 3, '-39': 41, '-38': 322, '-35': 1, '-34': 13, '-31': 20, '-30': 5, '-29': 23, '-28': 68, '-27': 7, '-26': 31, '-25': 277, '-24': 64, '-23': 29, '-22': 39, '-21': 28, '-20': 12, '-19': 138, '-18': 220, '-17': 19, '-16': 53, '-15': 105, '-14': 119, '-13': 20, '-12': 19, '-11': 134, '-10': 57, '-9': 338, '-8': 406, '-7': 873, '-6': 594, '-5': 1060, '-4': 1898, '-3': 1384, '-2': 1113, '-1': 1059, '0': 435, '1': 2935, '2': 1133, '3': 927, '4': 806, '5': 1439, '6': 1690, '7': 2144, '8': 349, '9': 248, '10': 668, '11': 1047, '12': 1807, '13': 2066, '14': 3840, '15': 8677, '16': 15240, '17': 20609, '18': 44904, '19': 916945, '20': 5403, '21': 184166};
+var general_type_count = {'-109unknown': 1, '-99craft': 2, '-99unknown': 1, '-99weapons and armor': 1, '-69craft': 127, '-69sculpture': 1, '-69unknown': 46, '-59unknown': 6, '-54unknown': 1, '-51unknown': 2, '-49craft': 30, '-49unknown': 66, '-49weapons and armor': 5, '-48craft': 1, '-44craft': 1, '-41craft': 1, '-41unknown': 2, '-39craft': 15, '-39unknown': 26, '-38craft': 263, '-38sculpture': 59, '-35unknown': 1, '-34craft': 1, '-34sculpture': 2, '-34unknown': 10, '-31craft': 18, '-31unknown': 2, '-30craft': 2, '-30sculpture': 1, '-30unknown': 2, '-29craft': 12, '-29sculpture': 2, '-29unknown': 9, '-28craft': 55, '-28sculpture': 4, '-28unknown': 9, '-27craft': 2, '-27unknown': 5, '-26craft': 25, '-26unknown': 6, '-25craft': 259, '-25sculpture': 4, '-25unknown': 14, '-24craft': 51, '-24sculpture': 1, '-24unknown': 12, '-23craft': 28, '-23unknown': 1, '-22craft': 22, '-22unknown': 17, '-21craft': 26, '-21unknown': 2, '-20craft': 10, '-20unknown': 2, '-19craft': 84, '-19sculpture': 33, '-19unknown': 21, '-18craft': 135, '-18sculpture': 44, '-18unknown': 11, '-18weapons and armor': 30, '-17craft': 16, '-17sculpture': 1, '-17unknown': 2, '-16craft': 27, '-16sculpture': 4, '-16unknown': 22, '-15craft': 81, '-15sculpture': 18, '-15unknown': 6, '-14craft': 114, '-14sculpture': 1, '-14unknown': 4, '-13craft': 17, '-13unknown': 3, '-12craft': 17, '-12unknown': 1, '-12weapons and armor': 1, '-11craft': 56, '-11sculpture': 66, '-11unknown': 12, '-10craft': 45, '-10sculpture': 3, '-10unknown': 9, '-9craft': 222, '-9painting': 1, '-9sculpture': 61, '-9unknown': 53, '-9weapons and armor': 1, '-8craft': 256, '-8sculpture': 21, '-8unknown': 69, '-8weapons and armor': 60, '-7craft': 592, '-7sculpture': 41, '-7unknown': 164, '-7weapons and armor': 76, '-6craft': 361, '-6sculpture': 62, '-6unknown': 160, '-6weapons and armor': 11, '-5craft': 868, '-5sculpture': 65, '-5unknown': 127, '-4craft': 1475, '-4sculpture': 156, '-4unknown': 266, '-4weapons and armor': 1, '-3craft': 1153, '-3print': 1, '-3sculpture': 16, '-3unknown': 212, '-3weapons and armor': 2, '-2craft': 802, '-2painting': 4, '-2sculpture': 19, '-2unknown': 287, '-2weapons and armor': 1, '-1craft': 807, '-1painting': 7, '-1sculpture': 31, '-1unknown': 213, '-1weapons and armor': 1, '0craft': 285, '0painting': 2, '0sculpture': 27, '0unknown': 120, '0weapons and armor': 1, '1craft': 2132, '1painting': 51, '1photograph': 40, '1print': 29, '1sculpture': 141, '1unknown': 540, '1weapons and armor': 2, '2craft': 812, '2painting': 4, '2sculpture': 54, '2unknown': 261, '2weapons and armor': 2, '3craft': 642, '3painting': 6, '3sculpture': 81, '3unknown': 195, '3weapons and armor': 3, '4craft': 563, '4painting': 4, '4print': 1, '4sculpture': 80, '4textile': 2, '4unknown': 149, '4weapons and armor': 7, '5craft': 1048, '5painting': 1, '5sculpture': 106, '5unknown': 277, '5weapons and armor': 7, '6craft': 706, '6painting': 13, '6print': 16, '6sculpture': 126, '6textile': 1, '6unknown': 827, '6weapons and armor': 1, '7craft': 1052, '7painting': 7, '7print': 181, '7sculpture': 170, '7textile': 1, '7unknown': 728, '7weapons and armor': 5, '8craft': 66, '8drawing': 2, '8painting': 66, '8print': 2, '8sculpture': 92, '8unknown': 119, '8weapons and armor': 2, '9craft': 27, '9painting': 84, '9photograph': 3, '9print': 4, '9sculpture': 57, '9unknown': 71, '9weapons and armor': 2, '10craft': 131, '10painting': 60, '10print': 3, '10sculpture': 128, '10unknown': 343, '10weapons and armor': 3, '11craft': 400, '11design': 24, '11drawing': 4, '11new media': 6, '11painting': 140, '11photograph': 161, '11sculpture': 160, '11unknown': 146, '11weapons and armor': 6, '12craft': 323, '12drawing': 10, '12installation': 5, '12new media': 2, '12painting': 286, '12photograph': 287, '12print': 20, '12sculpture': 651, '12unknown': 217, '12weapons and armor': 6, '13craft': 498, '13drawing': 21, '13installation': 9, '13painting': 474, '13photograph': 253, '13print': 31, '13sculpture': 418, '13textile': 14, '13unknown': 331, '13weapons and armor': 17, '14craft': 630, '14drawing': 27, '14new media': 2, '14painting': 1825, '14photograph': 115, '14print': 38, '14sculpture': 504, '14textile': 82, '14unknown': 582, '14weapons and armor': 35, '15craft': 1009, '15drawing': 446, '15installation': 13, '15new media': 14, '15painting': 4237, '15photograph': 291, '15print': 139, '15sculpture': 1229, '15textile': 85, '15unknown': 971, '15weapons and armor': 243, '16craft': 2612, '16drawing': 1517, '16installation': 4, '16new media': 27, '16painting': 5261, '16photograph': 273, '16print': 19, '16sculpture': 1283, '16textile': 40, '16unknown': 3637, '16weapons and armor': 567, '17craft': 2784, '17drawing': 825, '17mixed media': 6, '17new media': 22, '17painting': 8283, '17photograph': 277, '17print': 157, '17sculpture': 876, '17textile': 81, '17unknown': 6834, '17weapons and armor': 464, '18craft': 9259, '18drawing': 416, '18mixed media': 18, '18new media': 16, '18painting': 4472, '18photograph': 493, '18print': 1857, '18sculpture': 1378, '18textile': 218, '18unknown': 26084, '18weapons and armor': 693, '19craft': 6838, '19drawing': 576, '19mixed media': 49, '19painting': 4822, '19photograph': 296, '19print': 2674, '19sculpture': 1779, '19textile': 240, '19unknown': 899506, '19weapons and armor': 165, '20craft': 762, '20drawing': 16, '20mixed media': 7, '20painting': 328, '20photograph': 240, '20print': 140, '20sculpture': 78, '20textile': 37, '20unknown': 3789, '20weapons and armor': 6, '21craft': 14, '21painting': 184116, '21sculpture': 1, '21unknown': 35};
 
- for (var i = 0; i < 100; i++) {
-    xAxisData.push(i);
-    stack_general_type_photograph     .push((Math.random() *  10).toFixed(2));
-    stack_general_type_textile        .push((Math.random() *  10).toFixed(2));
-    stack_general_type_weapons        .push((Math.random() *  10).toFixed(2));
-    stack_general_type_drawing        .push((Math.random() *  10).toFixed(2));
-    stack_general_type_painting       .push((Math.random() *  10).toFixed(2));
-    stack_general_type_unknown        .push((Math.random() *  10).toFixed(2));
-    stack_general_type_craft          .push((Math.random() *  10).toFixed(2));
-    stack_general_type_print          .push((Math.random() *  10).toFixed(2));
-    stack_general_type_sculpture      .push((Math.random() *  10).toFixed(2));
-    stack_general_type_new_media      .push((Math.random() *  10).toFixed(2));
-    stack_general_type_design         .push((Math.random() *  10).toFixed(2));
-    stack_general_type_mixed_media    .push((Math.random() *  10).toFixed(2));
-    stack_general_type_installation   .push((Math.random() *  10).toFixed(2));
+ for (var i in centuries) {
+    xAxisData.push(centuries[i]);
+    stack_general_type_photograph     .push(general_type_count[String(centuries[i])+'photograph']/century_count[centuries[i]]*100);
+    stack_general_type_textile        .push(general_type_count[String(centuries[i])+'textile']/century_count[centuries[i]]*100);
+    stack_general_type_weapons        .push(general_type_count[String(centuries[i])+'weapons and armor']/century_count[centuries[i]]*100);
+    stack_general_type_drawing        .push(general_type_count[String(centuries[i])+'drawing']/century_count[centuries[i]]*100);
+    stack_general_type_painting       .push(general_type_count[String(centuries[i])+'painting']/century_count[centuries[i]]*100);
+    stack_general_type_unknown        .push(general_type_count[String(centuries[i])+'unknown']/century_count[centuries[i]]*100);
+    stack_general_type_craft          .push(general_type_count[String(centuries[i])+'craft']/century_count[centuries[i]]*100);
+    stack_general_type_print          .push(general_type_count[String(centuries[i])+'print']/century_count[centuries[i]]*100);
+    stack_general_type_sculpture      .push(general_type_count[String(centuries[i])+'sculpture']/century_count[centuries[i]]*100);
+    stack_general_type_new_media      .push(general_type_count[String(centuries[i])+'new media']/century_count[centuries[i]]*100);
+    stack_general_type_design         .push(general_type_count[String(centuries[i])+'design']/century_count[centuries[i]]*100);
+    stack_general_type_mixed_media    .push(general_type_count[String(centuries[i])+'mixed media']/century_count[centuries[i]]*100);
+    stack_general_type_installation   .push(general_type_count[String(centuries[i])+'installation']/century_count[centuries[i]]*100);
     stack_general_type_performance_art.push(99.99 
                                  - stack_general_type_photograph[i]
                                  - stack_general_type_textile[i]
