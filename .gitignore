@@ -2,5 +2,6 @@
 .ipython
 .local
 .idea
-data/*
+data/raw/*
 
+*.pyc
