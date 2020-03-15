@@ -626,7 +626,7 @@
  //-------------------------Series-------------------------
  var series_00 = {
   type: 'bar',
-  name: 'photograph',
+  name: 'Renaissance',
      gridIndex: grid_stack_gene_chart_index,
      xAxisIndex: xAxis_0_index,
      yAxisIndex: yAxis_0_index,
@@ -637,10 +637,16 @@
      emphasis: emphasisStyle,
      data: stack_general_type_photograph,
      markLine: {
+      //silent: true,
+      label: {
+            normal: {
+                show: false
+            }},
                 data: [
                     {
-        name: 'Horizontal line with Y value at 100',
-        xAxis: 14
+        name: '14th-17th century',
+        xAxis: 59
+        //valueIndex: 59
     },]}
  }
  var series_01 = {
@@ -1201,6 +1207,21 @@ var general_type_count = {'-109unknown': 1, '-99craft': 2, '-99unknown': 1, '-99
    if (option && typeof option === "object") {
      myChart.setOption(option, true);
    }
+
+    // Enable data zoom when user click Markline (文艺复兴 14th-17th).
+    myChart.on('click', function (params) {
+        if(params.componentType == "markLine"){
+            //console.log(centuries[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+        myChart.dispatchAction({
+            type: 'dataZoom',
+            //startValue: xAxisData[Math.max(params.dataIndex - zoomSize / 2, 0)],
+            //endValue: xAxisData[Math.min(params.dataIndex + zoomSize / 2, xAxisData.length - 1)]
+            startValue: 59,
+            endValue: 62
+        });
+    }
+    });
+
    document.getElementById("gallery")
    .innerHTML='<object type="text/html" data="./gallery.html" style="height: 100%; width:100%" ></object>';
  
