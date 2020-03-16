@@ -11,7 +11,7 @@ def update_year(in_year):
 dp = Dp()
 clean_udf = udf(update_year, IntegerType())
 
-df = dp.read_parquet(FILE.word_cloud_data1_uri)
+df = dp.read_parquet(FILE.word_cloud_data2_uri)
 df = df.filter(col(COL.year) >= 0)
 df = df.withColumn(COL.year, clean_udf(col(COL.year)))
 if MODE.debug:

@@ -1,5 +1,6 @@
 from pyspark.sql.session import SparkSession
 from pyspark.sql.functions import col
+from pyspark.sql.types import IntegerType
 from SYS import FILE, COL
 import pandas
 
@@ -7,7 +8,9 @@ import pandas
 class DataProcessor:
     def __init__(self):
         self.spark = self.__initial_spark()
-        self.word_cloud_df = self.__data_word_cloud_df()
+        self.__word_cloud_df = self.__get_data_word_cloud_df()
+        self.__data_all_art_df = self.__get_data_all_art_df()
+        self.__data_all_artiest_df = self.__get_data_all_artiest_df()
 
     @staticmethod
     def __initial_spark():
@@ -38,7 +41,7 @@ class DataProcessor:
             result[a_type] = df.select(col(COL.ratio)).rdd.flatMap(lambda x: x).collect()
         return result
 
-    def __data_word_cloud_df(self):
+    def __get_data_word_cloud_df(self):
         t_df = self.spark.read.parquet(FILE.result_word_cloud_uri)\
             .filter(col(COL.year) >= 0)\
             .withColumnRenamed(COL.count, COL.value)\
@@ -46,14 +49,14 @@ class DataProcessor:
         return t_df
 
     def get_word_cloud_data(self):
-        return self.word_cloud_df.groupby(col(COL.name))\
+        return self.__word_cloud_df.groupby(col(COL.name))\
             .sum(COL.value)\
             .withColumnRenamed(COL.sum_value, COL.value)\
             .sort(COL.value, ascending=False)\
             .limit(200).toPandas().to_json(orient='records')
 
-    def data_filter(self, start_year, end_year):
-        return self.word_cloud_df\
+    def word_cloud_data_filter(self, start_year, end_year):
+        return self.__word_cloud_df\
             .filter((col(COL.year) >= start_year) & (col(COL.year) <= end_year))\
             .drop(col(COL.year))\
             .groupby(col(COL.name)).sum(COL.value)\
@@ -61,3 +64,22 @@ class DataProcessor:
             .sort(COL.value, ascending=False)\
             .limit(200).toPandas().to_json(orient='records')
 
+    def __get_data_all_art_df(self):
+        return self.spark.read.parquet(FILE.cleaned_data2_uri)
+
+    def __get_data_all_artiest_df(self):
+        return self.__data_all_art_df.filter(col(COL.at_desc).isNotNull())\
+            .groupby(col(COL.year), col(COL.at_nm), col(COL.at_desc), col(COL.pic_url)).count()\
+            .withColumnRenamed(COL.at_nm, COL.name)\
+            .withColumnRenamed(COL.count, COL.value)\
+            .withColumnRenamed(COL.descri, COL.desc)\
+            .withColumn(COL.year, col(COL.year).cast(IntegerType()))
+
+    def get_artiest_index_chart_data(self):
+        return self.__data_all_artiest_df.sort(col(COL.count), ascending=False).limit(7)\
+            .toPandas().to_json(orient='records')
+
+    def artiest_index_chart_data_filter(self, s_year, e_year):
+        return self.__data_all_artiest_df.filter(col(COL.year).between(s_year, e_year))\
+            .sort(col(COL.count), ascending=False).limit(7) \
+            .toPandas().to_json(orient='records')

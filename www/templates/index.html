@@ -97,9 +97,10 @@
             <!-- rgb(46, 47, 51) -->
             <!-- rgb(41, 41, 45) -->
             <script type="text/javascript">
-                let stack_x_axis_data = {{ stack_x_axis_data | safe }};
-                let stack_item_data = {{ stack_item_data   | safe }};
-                let word_cloud_chart_data = {{ word_cloud_chart_data   | safe }};
+                let stack_x_axis_data        = {{ stack_x_axis_data | safe }};
+                let stack_item_data          = {{ stack_item_data   | safe }};
+                let word_cloud_chart_data    = {{ word_cloud_chart_data   | safe }};
+                let artiest_index_chart_data = {{ artiest_index_chart_data | safe}};
             </script>
             <div class="col-xl-8 col-lg-7 row" style="background-color: blue; margin: 0px;padding: 0px;">
                 <div class="col-xl-1" style="height: 100px; background-color: sandybrown;"></div>
@@ -110,11 +111,15 @@
             {#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#}
             <div class="col-xl-8 col-lg-7 " style="height: 100px; background-color: yellowgreen;">ICON/Description</div>
             <div class="row col-xl-8 col-lg-7" style="background-color: darkblue; margin: 0px;padding: 0px;">
-                <div id="echarts-tree" class="col-xl-5 align-self-center" style="height: 100px; background-color: darkcyan;padding: 0px; margin: 0px;">Tree</div>
-                <div id="echarts-artiest-index" class="col-xl-3 align-self-center" style="height: 100px; background-color: darkgreen;padding: 0px; margin: 0px;">Artiest Index</div>
-                <div class="col-xl-4" style="height: 100px; background-color: darkorchid;">Artiest Intro</div>
+                <div id="echarts-tree" class="col-xl-6 col-lg-6 align-self-center" style="height: 100px; background-color: darkcyan;padding: 0px; margin: 0px;">Tree</div>
+                <div id="echarts-artiest-index" class="col-xl-6 col-lg-6 align-self-center" style="height: 100px; background-color: darkgreen;padding: 0px; margin: 0px;">Artiest Index</div>
+
             </div>
-            <div id="echarts-word-cloud" class="col-xl-8 col-lg-7" style="height: 100px; background-color: yellowgreen;">word cloud</div>
+            <div id="echarts-artiest-intro" class="row col-xl-8 col-lg-7" style="background-color: darkorchid;margin: 0px;padding: 0px;">
+                    <div id="echarts-artiest-descr" class="col-xl-8" style="margin: 0px;padding: 0px;">Artiest Intro</div>
+                    <object id="echarts-artiest-img" class="col-xl-4" type="text/html" data="" style="margin: 0px;padding: 0px;"></object>
+            </div>
+            <div id="echarts-word-cloud" class="col-xl-8 col-lg-7" style="overflow: visible; background-color: yellowgreen;">word cloud</div>
 
             {#<script src='./echarts-wordcloud.js'></script>#}
             <script src="{{ url_for('static', filename = './js/echarts-wordcloud.js') }}"></script>

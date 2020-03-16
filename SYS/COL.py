@@ -28,3 +28,14 @@ count = 'count'
 sum_col = "sum"
 sum_count = "sum(count)"
 ratio = "ratio"
+
+name = "name"
+desc = "desc"
+born = "born"
+died = "died"
+nationality = "nationality"
+pic_url = "pic_url"
+wiki_url = "wiki_url"
+
+at_desc = "artiest_description"
+lower = "lower"

@@ -6,7 +6,8 @@ dp = Dp()
 stack_x_axis_data = dp.get_x_axis()
 stack_item_data = dp.get_stack_data()
 word_cloud_chart_data = dp.get_word_cloud_data()
-
+artiest_index_chart_data = dp.get_artiest_index_chart_data()
+# print(dp.artiest_index_chart_data_filter(0, 2000))
 
 @app.route('/')
 def index():
@@ -14,7 +15,8 @@ def index():
         'index.html',
         stack_x_axis_data=stack_x_axis_data,
         stack_item_data=stack_item_data,
-        word_cloud_chart_data=word_cloud_chart_data
+        word_cloud_chart_data=word_cloud_chart_data,
+        artiest_index_chart_data=artiest_index_chart_data
     )
 
 
@@ -34,8 +36,11 @@ def data_filter():
     print(rd)
     sy = rd["start_year"]
     ey = rd["end_year"]
-    return dp.data_filter(sy, ey)
+    word_cloud_data = dp.word_cloud_data_filter(sy, ey)
+    artiest_index_data = dp.artiest_index_chart_data_filter(sy, ey)
+    return {"word_cloud": word_cloud_data, "at_index": artiest_index_data}
 
 
 if __name__ == '__main__':
     app.run()
+

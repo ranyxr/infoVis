@@ -162,10 +162,20 @@ stack_chart.on("datazoom", function(para){
         XHR.send(JSON.stringify(request_data));
         XHR.onreadystatechange = function(){
               if(XHR.readyState === 4 && XHR.status === 200){
+                  let t_data = JSON.parse(XHR.responseText);
+
                   let t_option = word_cloud_chart.getOption();
-                  console.log(XHR.responseText)
-                  t_option.series[0].data = JSON.parse(XHR.responseText);
+                  t_option.series[0].data = JSON.parse(t_data.word_cloud);
                   word_cloud_chart.setOption(t_option);
+                  // console.log(JSON.parse(t_data.word_cloud));
+
+                  t_option = artiest_index_chart.getOption();
+                  artiest_index_chart_data = JSON.parse(t_data.at_index)
+                  let t_series_list = to_artiest_index_series_list(artiest_index_chart_data, []);
+                  console.log(t_series_list)
+                  t_option.series = t_series_list;
+                  artiest_index_chart.setOption(t_option);
+
               }
         };
     }, 3000);
