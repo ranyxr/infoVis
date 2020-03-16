@@ -5,7 +5,7 @@ from datetime import datetime
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StringType, ArrayType
 from pyspark.sql.functions import udf, col, explode, collect_list, count
-from SYS import COL, Mode, DIR, FILE
+from SYS import COL, MODE, DIR, FILE
 
 nltk.download('stopwords')
 os.system("python -m spacy download en_core_web_sm")
@@ -56,7 +56,7 @@ def get_unprocessed_df():
     try:
         in_df = spark.read.parquet(FILE.cleaned_data1_uri).select(col(COL.o_id), col(COL.descri), col(COL.year))
         in_df = in_df.filter(col(COL.descri).isNotNull()).drop_duplicates([COL.o_id, COL.year])
-        if Mode.limit:
+        if MODE.limit:
             in_df = in_df.limit(20)
         print("{} [System]: Cleaned data read in successfully! {} lines read in!".format(datetime.now(), in_df.count()))
         return in_df
@@ -70,6 +70,6 @@ if __name__ == '__main__':
     df = get_unprocessed_df()
     df = process_token(df)
     df.write.mode("overwrite").parquet(FILE.word_cloud_data1_uri, compression="gzip")
-    if Mode.debug:
+    if MODE.debug:
         df = df.filter(col(COL.descri).isNotNull())
         df.show()

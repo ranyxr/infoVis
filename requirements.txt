@@ -4,3 +4,5 @@ beautifulsoup4
 pandas
 fastparquet
 pyarrow
+pyspark
+geopy

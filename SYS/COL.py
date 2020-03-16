@@ -25,3 +25,6 @@ descri = "textual_description"
 ner = "ner"
 token = "token"
 count = 'count'
+sum_col = "sum"
+sum_count = "sum(count)"
+ratio = "ratio"

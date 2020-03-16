@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StringType, IntegerType, LongType, ArrayType
 from pyspark.sql.functions import col, udf, explode
-from SYS import FILE, COL, Mode
+from SYS import FILE, COL, MODE
 from geopy.geocoders import Nominatim
 from datetime import datetime
 import time
@@ -40,7 +40,7 @@ def get_omniart_data_frame():
     update_udf = udf(update_school_default_value, StringType())
     omniart_df = omniart_df.withColumn(COL.school, update_udf(col(COL.school)))
 
-    if Mode.limit:
+    if MODE.limit:
         omniart_df = omniart_df.filter(col(COL.school) != "null")
         omniart_df = spark.createDataFrame(omniart_df.limit(2).toPandas())
 
@@ -185,7 +185,7 @@ def clean_school(school):
 
 def get_school_df(omniart_df):
     school_df = omniart_df.groupby(col(COL.school)).count()
-    if Mode.limit is not True:
+    if MODE.limit is not True:
         school_df = school_df.filter(col(COL.count) > 100)
     school_df = school_df.toPandas()
 
@@ -207,7 +207,7 @@ def clean_l3_type(l3_type):
     if l3_type is None or l3_type in ['null', "(not assigned)", "nan", "MOMA - New York", "hide", "blocks",
                                       "others", "decorative arts", "bronzes|(not assigned)", "barkcloth",
                                       "gesso", "graphic", "software", "plastic", "surcoat", "plates",
-                                      "media", "collage", "lighting", "kris stand", "document", "brigandines",
+                                      "media", "collage", "lighting", "kris stand", "Document", "brigandines",
                                       "saddle plates", "parchment", "bibliography", "plastic", "software",
                                       "graphic design", "fencing equipment", "gesso", "assemblage", "barkcloth"]:
         return 'unknown'
@@ -227,7 +227,7 @@ def clean_l3_type(l3_type):
     ]:
         if x in l3_type:
             return x
-    if "assemblage" in l3_type or "menswear" in l3_type or "document" in l3_type\
+    if "assemblage" in l3_type or "menswear" in l3_type or "Document" in l3_type\
             or "thermometer" in l3_type or "plaster" in l3_type or "sharkskin" in l3_type:
         return "unknown"
     if "ivories" in l3_type:
@@ -302,7 +302,7 @@ if __name__ == '__main__':
     df = get_omniart_description(df)
     df = clean_omniart_data_frame(df).drop(col(COL.count))
     df.write.mode("overwrite").parquet(FILE.cleaned_data1_uri, compression="gzip")
-    if Mode.debug:
+    if MODE.debug:
         df = df.filter(col(COL.descri).isNotNull())
         df.show(100)
 
