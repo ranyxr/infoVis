@@ -50,16 +50,8 @@ alldata_df = alldata_df.withColumn(COL.year, clean_udf(col(COL.year)))
 if MODE.debug:
     alldata_df.show()
     print("Art year count: " + str(alldata_df.select(COL.year).drop_duplicates([COL.year]).count()))
+    alldata_df = alldata_df.filter(col(COL.descri).isNotNull())
+    print(alldata_df.count())
 else:
     dp.save_parquet(alldata_df, FILE.cleaned_data2_uri)
-# --------Clean word cloud data frame--------
-alldata_df = dp.read_parquet(FILE.word_cloud_data1_uri)
-# Filter year >= 0
-alldata_df = alldata_df.filter(col(COL.year) >= 0)
-# Reprocess year
-alldata_df = alldata_df.withColumn(COL.year, clean_udf(col(COL.year)))
-if MODE.debug:
-    alldata_df.show()
-    print(alldata_df.select(COL.year).drop_duplicates([COL.year]).count())
-else:
-    dp.save_parquet(alldata_df, FILE.word_cloud_data2_uri)
+

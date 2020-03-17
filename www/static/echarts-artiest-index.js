@@ -4,7 +4,6 @@ let artiest_index_chart_dom = document.getElementById("echarts-artiest-index");
 let artiest_descr_dom = document.getElementById("echarts-artiest-descr");
 let artiest_img_dom = document.getElementById("echarts-artiest-img");
 artiest_index_chart_dom.style.height = artiest_index_chart_height;
-artiest_descr_dom.style.height = artiest_index_chart_height;
 artiest_img_dom.style.height = artiest_index_chart_height;
 // Initial chart
 let artiest_index_chart = echarts.init(artiest_index_chart_dom);
@@ -87,7 +86,23 @@ function set_artiest_description(index){
 set_artiest_description(0);
 //---------------------Click ---------------------
 artiest_index_chart.on("click", function(param){
-    // document.getElementById("echarts-artiest-descr").innerText = artiest_index_chart_data[param.seriesIndex]["artiest_description"];
-    // document.getElementById("echarts-artiest-img").data = artiest_index_chart_data[param.seriesIndex]["pic_url"];
+    // setTimeout(function(){
+        let XHR = new XMLHttpRequest();
+        let request_data = {"artiest": artiest_index_chart_data[param.seriesIndex].name};
+
+        XHR.open('POST', "http://127.0.0.1:5000/api/filter_artiest");
+        XHR.setRequestHeader('content-type', 'application/json');
+
+        XHR.send(JSON.stringify(request_data));
+        XHR.onreadystatechange = function(){
+              if(XHR.readyState === 4 && XHR.status === 200){
+                  let t_data = JSON.parse(XHR.responseText);
+                  console.log(t_data)
+                  art_work_in_gallery = t_data;
+                  append_images();
+              }
+        };
+    // }, 3000);
+    console.log(artiest_index_chart_data[param.seriesIndex])
     set_artiest_description(param.seriesIndex)
 });

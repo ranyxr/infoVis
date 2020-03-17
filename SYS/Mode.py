@@ -1,3 +1,3 @@
 limit = False
-debug = False
+debug = True
 

@@ -41,3 +41,5 @@ wiki_url = "wiki_url"
 
 at_desc = "artiest_description"
 lower = "lower"
+src = "src"
+alt = "alt"

@@ -30,7 +30,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
 </head>
 
-<body id="page-top" onload="onload_func()" onresize="resize()">
+<body id="page-top" onload="" onresize="resize()">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -104,6 +104,7 @@
                 let stack_item_data          = {{ stack_item_data   | safe }};
                 let word_cloud_chart_data    = {{ word_cloud_chart_data   | safe }};
                 let artiest_index_chart_data = {{ artiest_index_chart_data | safe}};
+                let art_work_in_gallery      = {{ art_work_in_gallery | safe }};
             </script>
                 <div class="echart row" id="logo_descr" style="background-color: blue;">
             <div class="echart col-xl-1" id="logo" style="background-color: sandybrown;"></div>
@@ -129,13 +130,6 @@
                 <div class="echart " id="echarts-word-cloud" style="overflow: visible; background-color: yellowgreen;">word cloud</div>
 
                 {#<script src='./echarts-wordcloud.js'></script>#}
-                <script src="{{ url_for('static', filename = './js/echarts-wordcloud.js') }}"></script>
-                <script src="{{ url_for('static', filename = './trip-button.js') }}"></script>
-                <script src="{{ url_for('static', filename = './echarts-overall.js') }}"></script>
-                <script src="{{ url_for('static', filename = './echarts-stack.js') }}"></script>
-                <script src="{{ url_for('static', filename = './echarts-tree.js') }}"></script>
-                <script src="{{ url_for('static', filename = './echarts-artiest-index.js') }}"></script>
-                <script src="{{ url_for('static', filename = './echarts-word-cloud.js') }}"></script>
             </div>
 
             <div id="gallery" class="echart col-xl-4 col-lg-5" style="width: 100%; background-color: rgb(56,89,219);">
@@ -144,22 +138,22 @@
                     <p id="art-title" style="display:none;">Click on the images below:</p>
                 </div>
                     <div class="gallery-row">
-                    <div class="gallery-column">
-                        <img src="https://www.w3schools.com/howto/img_nature.jpg" alt = "describe 1" name="Nature" style="width:100%" onclick="show_pic(this);">
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_nature.jpg" alt = "describe 1" name="Nature" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_snow.jpg" alt = "describe 2" name="Snow" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_mountains.jpg" alt = "describe 3" name="Mountains" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 4" name="Lights" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 5" name="Lights" style="width:100%" onclick="show_pic(this);">
+                        </div>
                     </div>
-                    <div class="gallery-column">
-                        <img src="https://www.w3schools.com/howto/img_snow.jpg" alt = "describe 2" name="Snow" style="width:100%" onclick="show_pic(this);">
-                    </div>
-                    <div class="gallery-column">
-                        <img src="https://www.w3schools.com/howto/img_mountains.jpg" alt = "describe 3" name="Mountains" style="width:100%" onclick="show_pic(this);">
-                    </div>
-                    <div class="gallery-column">
-                        <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 4" name="Lights" style="width:100%" onclick="show_pic(this);">
-                    </div>
-                    <div class="gallery-column">
-                        <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 5" name="Lights" style="width:100%" onclick="show_pic(this);">
-                    </div>
-                </div>
                     <div class="gallery-container">
                     <span onclick="hide_pic(this);" class="gallery-closebtn">&times;</span>
                     <img id="gallery-show-image" style="width:100%;">
@@ -168,6 +162,13 @@
                 </div>
             </div>
             <script src="{{ url_for('static', filename = './gallery.js') }}"></script>
+            <script src="{{ url_for('static', filename = './js/echarts-wordcloud.js') }}"></script>
+            <script src="{{ url_for('static', filename = './trip-button.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-overall.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-stack.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-tree.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-artiest-index.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-word-cloud.js') }}"></script>
         </div>
     </div>
 </section>

@@ -7,6 +7,9 @@ stack_x_axis_data = dp.get_x_axis()
 stack_item_data = dp.get_stack_data()
 word_cloud_chart_data = dp.get_word_cloud_data()
 artiest_index_chart_data = dp.get_artiest_index_chart_data()
+art_work_in_gallery = dp.random_get_arts()
+
+
 @app.route('/')
 def index():
     return render_template(
@@ -14,7 +17,8 @@ def index():
         stack_x_axis_data=stack_x_axis_data,
         stack_item_data=stack_item_data,
         word_cloud_chart_data=word_cloud_chart_data,
-        artiest_index_chart_data=artiest_index_chart_data
+        artiest_index_chart_data=artiest_index_chart_data,
+        art_work_in_gallery=art_work_in_gallery
     )
 
 
@@ -31,13 +35,29 @@ def get_stack_data():
 @app.route('/api/filter', methods=['POST'])
 def data_filter():
     rd = request.get_json()
-    print(rd)
     sy = rd["start_year"]
     ey = rd["end_year"]
     trip_tp = rd["trip_type"]
     word_cloud_data = dp.word_cloud_data_filter(sy, ey)
     artiest_index_data = dp.artiest_index_chart_data_filter(sy, ey, trip_tp)
     return {"word_cloud": word_cloud_data, "at_index": artiest_index_data}
+
+
+@app.route('/api/filter_word', methods=['POST'])
+def filter_word():
+    raise NotImplementedError
+
+
+@app.route('/api/filter_type', methods=['POST'])
+def filter_type():
+    raise NotImplementedError
+
+
+@app.route('/api/filter_artiest', methods=['POST'])
+def filter_artiest():
+    rd = request.get_json()
+    artiest = rd["artiest"]
+    return dp.filter_artiest(artiest)
 
 
 if __name__ == '__main__':

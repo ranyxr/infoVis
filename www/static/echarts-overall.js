@@ -41,24 +41,6 @@ let trip_type_w = "west";
 
 let trip_type = trip_type_g;
 
-let eastern_trip_data = [
-    {
-        name: 'First presidential debate',
-        xAxis: '273'
-    },
-    {
-        name: 'Russia Directed Hacks to Influence Elections',
-        xAxis: '844'
-    },
-    {
-        name: 'Hillary Clinton case under review by FBI',
-        xAxis: '964'
-    },
-    {
-        name: 'US Presidential Election 2016',
-        xAxis: '1085'
-    }
-];
 let western_trip_data = [
     {
         name: 'Medieval art',

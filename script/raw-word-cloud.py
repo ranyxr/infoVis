@@ -54,7 +54,7 @@ spark = SparkSession\
 
 def get_unprocessed_df():
     try:
-        in_df = spark.read.parquet(FILE.cleaned_data1_uri).select(col(COL.o_id), col(COL.descri), col(COL.year))
+        in_df = spark.read.parquet(FILE.cleaned_data2_uri).select(col(COL.o_id), col(COL.descri), col(COL.year))
         in_df = in_df.filter(col(COL.descri).isNotNull()).drop_duplicates([COL.o_id, COL.year])
         if MODE.limit:
             in_df = in_df.limit(20)
@@ -67,9 +67,10 @@ def get_unprocessed_df():
 
 
 if __name__ == '__main__':
-    df = get_unprocessed_df()
-    df = process_token(df)
-    df.write.mode("overwrite").parquet(FILE.word_cloud_data1_uri, compression="gzip")
-    if MODE.debug:
-        df = df.filter(col(COL.descri).isNotNull())
-        df.show()
+    spark.read.parquet(FILE.word_cloud_data1_uri).groupby(col(COL.token)).count().sort(col(COL.count), ascending=False).show()
+    # df = get_unprocessed_df()
+    # df = process_token(df)
+    # df.write.mode("overwrite").parquet(FILE.word_cloud_data1_uri, compression="gzip")
+    # if MODE.debug:
+    #     df = df.filter(col(COL.descri).isNotNull())
+    #     df.show()

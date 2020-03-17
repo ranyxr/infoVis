@@ -1,7 +1,8 @@
 from pyspark.sql.session import SparkSession
-from pyspark.sql.functions import col
+from pyspark.sql.functions import col, rand
 from pyspark.sql.types import IntegerType
 from SYS import FILE, COL
+import random
 import pandas
 
 
@@ -105,13 +106,33 @@ class DataProcessor:
             .toPandas().to_json(orient='records')
         return result
 
-    def trry(self):
-        # |creation_year|name|artiest_description|pic_url|value|
-        # self.__data_all_artiest_df.show()
-        # |school|omni_id|textual_description|artwork_name|creation_year|
-        # century|source_url|image_url|l1_type|l3_type| country|country_code|coordinate|artist_full_name|
-        # born|died|nationality|pic_url|artiest_description|wiki_ur|
+    def random_get_arts(self):
+        return self.__data_all_art_df \
+            .select(col(COL.i_url).alias(COL.src), col(COL.descri).alias(COL.alt), col(COL.ak_nm).alias(COL.name)) \
+            .orderBy(rand(random.seed())) \
+            .limit(20) \
+            .toPandas().to_json(orient='records')
+
+    def filter_artiest(self, aritest):
+        return self.__data_all_art_df.filter(col(COL.at_nm) == aritest)\
+            .select(col(COL.i_url).alias(COL.src), col(COL.descri).alias(COL.alt), col(COL.ak_nm).alias(COL.name))\
+            .orderBy(rand(random.seed()))\
+            .limit(20)\
+            .toPandas().to_json(orient='records')
+
+    def filter_word(self, s_year, e_year, word):
+        o_id_list = self.__word_cloud_df\
+            .filter(col(COL.year).between(s_year, e_year)).filter(col(COL.name) == word)\
+            .select(col(COL.o_id))
+        o_id_list = [row[COL.o_id] for row in o_id_list.collect()]
+        o_id_list = [o_id for o_list in o_id_list for o_id in o_list]
+        if len(o_id_list) > 20:
+            import random
+            o_id_list = random.sample(o_id_list, 20)
         # self.__data_all_art_df.show()
-        #|creation_year|name|omni_id|value|
-        #self.__word_cloud_df.show()
-        self.__data_all_art_df.groupby(col(COL.country)).count().show(100)
+        return self.__data_all_art_df.filter(col(COL.o_id).isin(o_id_list)) \
+            .select(col(COL.i_url).alias(COL.src), col(COL.descri).alias(COL.alt), col(COL.ak_nm).alias(COL.name)) \
+            .toPandas().to_json(orient='records')
+
+    def trry(self):
+        o_id_list = self.__word_cloud_df.show()

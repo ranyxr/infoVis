@@ -174,11 +174,12 @@ stack_chart.on("datazoom", function(para){
                   let t_series_list = to_artiest_index_series_list(artiest_index_chart_data, []);
                   t_option.series = t_series_list;
                   artiest_index_chart.setOption(t_option);
-
+                  set_artiest_description(0);
               }
         };
     }, 3000);
    });
+
 stack_chart.on("click", function (para) {
     if(para.componentType === "markLine"){
         let temp_s_value_index = parseInt(parseInt(para.value / 20.1));
@@ -193,9 +194,9 @@ stack_chart.on("click", function (para) {
         });
         let trip_description_dom = document.getElementById("trip-description");
         trip_description_dom.innerText = western_trip_data[para.dataIndex]["description"];
-        console.log(para)
     }
 });
+
 if (chart_stack_option && typeof chart_stack_option === "object") {
      stack_chart.setOption(chart_stack_option, true);
 }

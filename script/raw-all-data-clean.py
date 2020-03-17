@@ -281,6 +281,7 @@ def clean_omniart_data_frame(omniart_df):
     # Step | Clean school's information
     clean_udf = udf(clean_school_raw_clean, ArrayType(StringType()))
     omniart_df = omniart_df.withColumn(COL.school, clean_udf(col(COL.school)))
+
     omniart_df = omniart_df.withColumn(COL.school, explode(COL.school))
 
     school_df = get_school_df(omniart_df)
@@ -301,8 +302,12 @@ if __name__ == '__main__':
     df = get_omniart_data_frame()
     df = get_omniart_description(df)
     df = clean_omniart_data_frame(df).drop(col(COL.count))
-    df.write.mode("overwrite").parquet(FILE.cleaned_data1_uri, compression="gzip")
     if MODE.debug:
         df = df.filter(col(COL.descri).isNotNull())
         df.show(100)
+        print(df.count())
+        df.write.mode("overwrite").parquet(FILE.cleaned_data1_uri, compression="gzip")
+    else:
+        df.write.mode("overwrite").parquet(FILE.cleaned_data1_uri, compression="gzip")
+
 
