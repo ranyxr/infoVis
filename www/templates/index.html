@@ -16,6 +16,7 @@
     <!-- Custom fonts for this template -->
     {#  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">#}
     <link href="{{ url_for('static', filename = './vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename = './gallery.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
@@ -91,46 +92,82 @@
 </section>
 
 <!-- Projects Section -->
-<section id="chart-gallery" class="projects-section bg-light" style="padding: 0px; margin: 0px;">
-    <div class="projects-section" style="padding: 0px; margin: 0px;">
-        <div class="row align-items-center no-gutters">
-            <!-- rgb(46, 47, 51) -->
-            <!-- rgb(41, 41, 45) -->
-            <script type="text/javascript">
+<!-- rgb(46, 47, 51) -->
+<!-- rgb(41, 41, 45) -->
+<section class="echart bg-light" id="chart-gallery" style="">
+    <div class="iv-div ">
+{#         align-items-center#}
+        <div class="row no-gutters" >
+            <div id="chart" class="col-xl-8 col-lg-7" style="background-color: rgb(41, 41, 200);">
+                <script type="text/javascript">
                 let stack_x_axis_data        = {{ stack_x_axis_data | safe }};
                 let stack_item_data          = {{ stack_item_data   | safe }};
                 let word_cloud_chart_data    = {{ word_cloud_chart_data   | safe }};
                 let artiest_index_chart_data = {{ artiest_index_chart_data | safe}};
             </script>
-            <div class="col-xl-8 col-lg-7 row" style="background-color: blue; margin: 0px;padding: 0px;">
-                <div class="col-xl-1" style="height: 100px; background-color: sandybrown;"></div>
-                <div class="col-xl-11" style="height: 100px; background-color: rebeccapurple;">Logo Title Description
+                <div class="echart row" id="logo_descr" style="background-color: blue;">
+            <div class="echart col-xl-1" id="logo" style="background-color: sandybrown;"></div>
+            <div class="echart col-xl-11" id="descr" style="background-color: rebeccapurple;">Logo Title Description</div>
+        </div>
+                <div class="echart " id="echarts-stack" >Stack/Zoom bar/Legend</div>
+                {#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#}
+                <div class="echart" style="background-color: yellowgreen;">
+                    <div class="echart row" id="trip-button" style="">
+                        <button class="echart col-sm-6 trip_btn" id="western-trip" >Western Trip</button>
+                        <button class="echart col-sm-6 trip_btn trip_btn_active" id="global-trip">Global View</button>
+                    </div>
+                </div>
+                <div class="echart " id="trip-description"></div>
+                <div class="echart row" style="background-color: darkblue;">
+            <div class="echart col-xl-6 col-lg-6 align-self-center"  id="echarts-tree" style="background-color: darkcyan;">Tree</div>
+            <div class="echart col-xl-6 col-lg-6 align-self-center" id="echarts-artiest-index" style="background-color: darkgreen;">Artiest Index</div>
+        </div>
+                <div class="echart row" id="echarts-artiest-intro" style="background-color: darkorchid;">
+            <div class="echart col-xl-8 col-lg-7" id="echarts-artiest-descr"  style="">Artiest Intro</div>
+            <object class="echart col-xl-4 col-lg-5" id="echarts-artiest-img" type="text/html" data="" style=""></object>
+        </div>
+                <div class="echart " id="echarts-word-cloud" style="overflow: visible; background-color: yellowgreen;">word cloud</div>
+
+                {#<script src='./echarts-wordcloud.js'></script>#}
+                <script src="{{ url_for('static', filename = './js/echarts-wordcloud.js') }}"></script>
+                <script src="{{ url_for('static', filename = './trip-button.js') }}"></script>
+                <script src="{{ url_for('static', filename = './echarts-overall.js') }}"></script>
+                <script src="{{ url_for('static', filename = './echarts-stack.js') }}"></script>
+                <script src="{{ url_for('static', filename = './echarts-tree.js') }}"></script>
+                <script src="{{ url_for('static', filename = './echarts-artiest-index.js') }}"></script>
+                <script src="{{ url_for('static', filename = './echarts-word-cloud.js') }}"></script>
+            </div>
+
+            <div id="gallery" class="echart col-xl-4 col-lg-5" style="width: 100%; background-color: rgb(56,89,219);">
+                <div id="inner-gallery">
+                    <div style="text-align:center">
+                    <p id="art-title" style="display:none;">Click on the images below:</p>
+                </div>
+                    <div class="gallery-row">
+                    <div class="gallery-column">
+                        <img src="https://www.w3schools.com/howto/img_nature.jpg" alt = "describe 1" name="Nature" style="width:100%" onclick="show_pic(this);">
+                    </div>
+                    <div class="gallery-column">
+                        <img src="https://www.w3schools.com/howto/img_snow.jpg" alt = "describe 2" name="Snow" style="width:100%" onclick="show_pic(this);">
+                    </div>
+                    <div class="gallery-column">
+                        <img src="https://www.w3schools.com/howto/img_mountains.jpg" alt = "describe 3" name="Mountains" style="width:100%" onclick="show_pic(this);">
+                    </div>
+                    <div class="gallery-column">
+                        <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 4" name="Lights" style="width:100%" onclick="show_pic(this);">
+                    </div>
+                    <div class="gallery-column">
+                        <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 5" name="Lights" style="width:100%" onclick="show_pic(this);">
+                    </div>
+                </div>
+                    <div class="gallery-container">
+                    <span onclick="hide_pic(this);" class="gallery-closebtn">&times;</span>
+                    <img id="gallery-show-image" style="width:100%;">
+                    <p id="gallery-description" style="display:none;"></p>
+                </div>
                 </div>
             </div>
-            <div id="echarts-stack" class="col-xl-8 col-lg-7">Stack/Zoom bar/Legend</div>
-            {#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#}
-            <div class="col-xl-8 col-lg-7 " style="height: 100px; background-color: yellowgreen;">ICON/Description</div>
-            <div class="row col-xl-8 col-lg-7" style="background-color: darkblue; margin: 0px;padding: 0px;">
-                <div id="echarts-tree" class="col-xl-6 col-lg-6 align-self-center" style="height: 100px; background-color: darkcyan;padding: 0px; margin: 0px;">Tree</div>
-                <div id="echarts-artiest-index" class="col-xl-6 col-lg-6 align-self-center" style="height: 100px; background-color: darkgreen;padding: 0px; margin: 0px;">Artiest Index</div>
-
-            </div>
-            <div id="echarts-artiest-intro" class="row col-xl-8 col-lg-7" style="background-color: darkorchid;margin: 0px;padding: 0px;">
-                    <div id="echarts-artiest-descr" class="col-xl-8" style="margin: 0px;padding: 0px;">Artiest Intro</div>
-                    <object id="echarts-artiest-img" class="col-xl-4" type="text/html" data="" style="margin: 0px;padding: 0px;"></object>
-            </div>
-            <div id="echarts-word-cloud" class="col-xl-8 col-lg-7" style="overflow: visible; background-color: yellowgreen;">word cloud</div>
-
-            {#<script src='./echarts-wordcloud.js'></script>#}
-            <script src="{{ url_for('static', filename = './js/echarts-wordcloud.js') }}"></script>
-            <script src="{{ url_for('static', filename = './echarts-overall.js') }}"></script>
-            <script src="{{ url_for('static', filename = './echarts-stack.js') }}"></script>
-            <script src="{{ url_for('static', filename = './echarts-tree.js') }}"></script>
-            <script src="{{ url_for('static', filename = './echarts-artiest-index.js') }}"></script>
-            <script src="{{ url_for('static', filename = './echarts-word-cloud.js') }}"></script>
-            <div id="gallery" class="col-xl-4 col-lg-5"
-                 style="height: 100px; width: 100%,; background-color: rgb(41, 41, 45);">
-            </div>
+            <script src="{{ url_for('static', filename = './gallery.js') }}"></script>
         </div>
     </div>
 </section>

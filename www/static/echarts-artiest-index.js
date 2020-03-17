@@ -65,7 +65,6 @@ function to_artiest_index_series_list(in_data, in_list) {
     }
     return in_list
 }
-// console.log(artiest_index_chart_data)
 artiest_index_chart_list = to_artiest_index_series_list(artiest_index_chart_data, artiest_index_chart_list);
 //------------------Generate Graph------------------
 let artiest_index_chart_option = {
@@ -80,11 +79,15 @@ let artiest_index_chart_option = {
 if (artiest_index_chart_option && typeof artiest_index_chart_option === "object") {
      artiest_index_chart.setOption(artiest_index_chart_option, true);
 }
-
+//------------------Description ------------------
+function set_artiest_description(index){
+    document.getElementById("echarts-artiest-descr").innerText = artiest_index_chart_data[index]["artiest_description"];
+    document.getElementById("echarts-artiest-img").data = artiest_index_chart_data[index]["pic_url"];
+}
+set_artiest_description(0);
+//---------------------Click ---------------------
 artiest_index_chart.on("click", function(param){
-    // console.log(param);
-    // console.log(artiest_index_chart_data[param.seriesIndex]);
-    let _pic_url = artiest_index_chart_data[param.seriesIndex]["pic_url"];
-    document.getElementById("echarts-artiest-descr").innerText = artiest_index_chart_data[param.seriesIndex]["artiest_description"];
-    document.getElementById("echarts-artiest-img").data = artiest_index_chart_data[param.seriesIndex]["pic_url"];
+    // document.getElementById("echarts-artiest-descr").innerText = artiest_index_chart_data[param.seriesIndex]["artiest_description"];
+    // document.getElementById("echarts-artiest-img").data = artiest_index_chart_data[param.seriesIndex]["pic_url"];
+    set_artiest_description(param.seriesIndex)
 });

@@ -154,7 +154,7 @@ stack_chart.on("datazoom", function(para){
         data_zoom_end   = temp_e;
 
         let XHR = new XMLHttpRequest();
-        let request_data = {"start_year": temp_s, "end_year": temp_e};
+        let request_data = {"start_year": temp_s, "end_year": temp_e, "trip_type": trip_type};
 
         XHR.open('POST', "http://127.0.0.1:5000/api/filter");
         XHR.setRequestHeader('content-type', 'application/json');
@@ -170,9 +170,8 @@ stack_chart.on("datazoom", function(para){
                   // console.log(JSON.parse(t_data.word_cloud));
 
                   t_option = artiest_index_chart.getOption();
-                  artiest_index_chart_data = JSON.parse(t_data.at_index)
+                  artiest_index_chart_data = JSON.parse(t_data.at_index);
                   let t_series_list = to_artiest_index_series_list(artiest_index_chart_data, []);
-                  console.log(t_series_list)
                   t_option.series = t_series_list;
                   artiest_index_chart.setOption(t_option);
 
@@ -180,6 +179,23 @@ stack_chart.on("datazoom", function(para){
         };
     }, 3000);
    });
+stack_chart.on("click", function (para) {
+    if(para.componentType === "markLine"){
+        let temp_s_value_index = parseInt(parseInt(para.value / 20.1));
+        let temp_e_value_index = temp_s_value_index + 15;
+        if (temp_e_value_index > 100){
+            temp_e_value_index = 100;
+        }
+        stack_chart.dispatchAction({
+            type: 'dataZoom',
+            startValue: temp_s_value_index,
+            endValue:   temp_e_value_index
+        });
+        let trip_description_dom = document.getElementById("trip-description");
+        trip_description_dom.innerText = western_trip_data[para.dataIndex]["description"];
+        console.log(para)
+    }
+});
 if (chart_stack_option && typeof chart_stack_option === "object") {
      stack_chart.setOption(chart_stack_option, true);
 }

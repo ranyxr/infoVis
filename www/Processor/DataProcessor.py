@@ -10,7 +10,9 @@ class DataProcessor:
         self.spark = self.__initial_spark()
         self.__word_cloud_df = self.__get_data_word_cloud_df()
         self.__data_all_art_df = self.__get_data_all_art_df()
+        self.__data_western_art_df = self.__get_data_western_art_df()
         self.__data_all_artiest_df = self.__get_data_all_artiest_df()
+        self.__data_western_artiest_df = self.__get_data_western_artiest_df()
 
     @staticmethod
     def __initial_spark():
@@ -67,6 +69,12 @@ class DataProcessor:
     def __get_data_all_art_df(self):
         return self.spark.read.parquet(FILE.cleaned_data2_uri)
 
+    def __get_data_western_art_df(self):
+        return self.__data_all_art_df.filter(~col(COL.country).isin(["Philippines", "Fiji", "Iraq", "Cambodia", "Peru",
+                                                             "Benin", "China", "Chile", "Iran", "Thailand", "Venezuela",
+                                                             "South Korea", "Mexico", "The Bahamas", "Ethiopia", "Japan",
+                                                             "Nepal", "Egypt", "Pakistan", "Vietnam"]))
+
     def __get_data_all_artiest_df(self):
         return self.__data_all_art_df.filter(col(COL.at_desc).isNotNull())\
             .groupby(col(COL.year), col(COL.at_nm), col(COL.at_desc), col(COL.pic_url)).count()\
@@ -75,11 +83,35 @@ class DataProcessor:
             .withColumnRenamed(COL.descri, COL.desc)\
             .withColumn(COL.year, col(COL.year).cast(IntegerType()))
 
+    def __get_data_western_artiest_df(self):
+        return self.__data_western_art_df.filter(col(COL.at_desc).isNotNull()) \
+            .groupby(col(COL.year), col(COL.at_nm), col(COL.at_desc), col(COL.pic_url)).count() \
+            .withColumnRenamed(COL.at_nm, COL.name) \
+            .withColumnRenamed(COL.count, COL.value) \
+            .withColumnRenamed(COL.descri, COL.desc) \
+            .withColumn(COL.year, col(COL.year).cast(IntegerType()))
+
     def get_artiest_index_chart_data(self):
         return self.__data_all_artiest_df.sort(col(COL.count), ascending=False).limit(7)\
             .toPandas().to_json(orient='records')
 
-    def artiest_index_chart_data_filter(self, s_year, e_year):
-        return self.__data_all_artiest_df.filter(col(COL.year).between(s_year, e_year))\
-            .sort(col(COL.count), ascending=False).limit(7) \
+    def artiest_index_chart_data_filter(self, s_year, e_year, trip_type):
+        if trip_type == "west":
+            in_df = self.__data_western_artiest_df
+        else:
+            in_df = self.__data_all_artiest_df
+        in_df  = in_df.filter(col(COL.year).between(s_year, e_year))
+        result = in_df.sort(col(COL.count), ascending=False).limit(7) \
             .toPandas().to_json(orient='records')
+        return result
+
+    def trry(self):
+        # |creation_year|name|artiest_description|pic_url|value|
+        # self.__data_all_artiest_df.show()
+        # |school|omni_id|textual_description|artwork_name|creation_year|
+        # century|source_url|image_url|l1_type|l3_type| country|country_code|coordinate|artist_full_name|
+        # born|died|nationality|pic_url|artiest_description|wiki_ur|
+        # self.__data_all_art_df.show()
+        #|creation_year|name|omni_id|value|
+        #self.__word_cloud_df.show()
+        self.__data_all_art_df.groupby(col(COL.country)).count().show(100)

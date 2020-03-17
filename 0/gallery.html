@@ -7,37 +7,32 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial;
-}
-
-/* The grid: Four equal columns that floats next to each other */
-.column {
+/* The grid: Four equal gallery-columns that floats next to each other */
+.gallery-column {
   float: left;
   width: 25%;
   padding: 10px;
 }
 
 /* Style the images inside the grid */
-.column img {
+.gallery-column img {
   opacity: 0.8; 
   cursor: pointer; 
 }
 
-.column img:hover {
+.gallery-column img:hover {
   opacity: 1;
 }
 
-/* Clear floats after the columns */
-.row:after {
+/* Clear floats after the gallery-columns */
+.gallery-row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* The expanding image container */
-.container {
+/* The expanding image gallery-container */
+.gallery-container {
   position: relative;
   display: none;
 }
@@ -52,7 +47,7 @@ body {
 }
 
 /* Closable button inside the expanded image */
-.closebtn {
+.gallery-closebtn {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -68,27 +63,27 @@ body {
   <p id="art-title" style="display:none;">Click on the images below:</p>
 </div>
 
-<!-- The four columns -->
-<div class="row">
-  <div class="column">
+<!-- The four gallery-columns -->
+<div class="gallery-row">
+  <div class="gallery-column">
     <img src="https://www.w3schools.com/howto/img_nature.jpg" alt = "describe 1" name="Nature" style="width:100%" onclick="show_pic(this);">
   </div>
-  <div class="column">
+  <div class="gallery-column">
     <img src="https://www.w3schools.com/howto/img_snow.jpg" alt = "describe 2" name="Snow" style="width:100%" onclick="show_pic(this);">
   </div>
-  <div class="column">
+  <div class="gallery-column">
     <img src="https://www.w3schools.com/howto/img_mountains.jpg" alt = "describe 3" name="Mountains" style="width:100%" onclick="show_pic(this);">
   </div>
-  <div class="column">
+  <div class="gallery-column">
     <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 4" name="Lights" style="width:100%" onclick="show_pic(this);">
   </div>
-  <div class="column">
+  <div class="gallery-column">
     <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 5" name="Lights" style="width:100%" onclick="show_pic(this);">
   </div>
 </div>
 
-<div class="container">
-  <span onclick="hide_pic(this);" class="closebtn">&times;</span>
+<div class="gallery-container">
+  <span onclick="hide_pic(this);" class="gallery-closebtn">&times;</span>
   <img id="expandedImg" style="width:100%;">
   <p id="description" style="display:none;"></p>
 </div>
@@ -108,7 +103,7 @@ function show_pic(imgs) {
   description_dom.style.display=''
   description_dom.innerText = imgs.alt;
   //Hide unchoosen pics
-  var x = document.getElementsByClassName("column");
+  var x = document.getElementsByClassName("gallery-column");
   var i;
   for (i = 0; i < x.length; i++) {
     x[i].style.display='none'
@@ -121,7 +116,7 @@ function hide_pic(colse_btn) {
   var art_title_dom = document.getElementById("art-title");
   art_title_dom.style.display='none'
   //Show all pics
-  var x = document.getElementsByClassName("column");
+  var x = document.getElementsByClassName("gallery-column");
   var i;
   for (i = 0; i < x.length; i++) {
     x[i].style.display=''

@@ -1,0 +1,80 @@
+/* Style the buttons */
+.trip_btn {
+    border: none;
+    outline: none;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
+}
+/* Style the active class, and buttons on mouse-over */
+.trip_btn_active, .trip_btn:hover {
+    background-color: #666;
+    color: white;
+}
+.iv-div{
+    margin: 0;
+    padding: 0;
+}
+.echart{
+    margin: 0;
+    padding: 0;
+}
+#inner-gallery{
+    position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  font-size: 20px;
+    background-color: #3c6360;
+}
+/** {*/
+  /*box-sizing: border-box;*/
+/*}*/
+
+/* The grid: Four equal gallery-columns that floats next to each other */
+.gallery-column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.gallery-column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.gallery-column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the gallery-columns */
+.gallery-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image gallery-container */
+.gallery-container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#art_title_dom {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.gallery-closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}

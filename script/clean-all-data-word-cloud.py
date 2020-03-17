@@ -23,7 +23,7 @@ for k in a_json:
     for nk in a_json[k]:
         for column in artiest_columns:
             artiest_dict[column].append(nk[column])
-# Load all data with spark
+# Load all art data with spark
 artiest_df = pd.DataFrame(artiest_dict, columns=artiest_columns)
 artiest_df = dp.spark.createDataFrame(artiest_df)\
     .withColumnRenamed(COL.name, COL.at_nm)\
