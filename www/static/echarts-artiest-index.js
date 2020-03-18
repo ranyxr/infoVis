@@ -1,4 +1,4 @@
-let artiest_index_chart_height = "400px";
+let artiest_index_chart_height = "300px";
 // Get dom in html
 let artiest_index_chart_dom = document.getElementById("echarts-artiest-index");
 let artiest_descr_dom = document.getElementById("echarts-artiest-descr");

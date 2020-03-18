@@ -7,7 +7,7 @@ stack_x_axis_data = dp.get_x_axis()
 stack_item_data = dp.get_stack_data()
 word_cloud_chart_data = dp.get_word_cloud_data()
 artiest_index_chart_data = dp.get_artiest_index_chart_data()
-art_work_in_gallery = dp.random_get_arts()
+# art_work_in_gallery = dp.random_get_arts()
 
 
 @app.route('/')
@@ -18,7 +18,7 @@ def index():
         stack_item_data=stack_item_data,
         word_cloud_chart_data=word_cloud_chart_data,
         artiest_index_chart_data=artiest_index_chart_data,
-        art_work_in_gallery=art_work_in_gallery
+        art_work_in_gallery=dp.random_get_arts()
     )
 
 
@@ -40,7 +40,8 @@ def data_filter():
     trip_tp = rd["trip_type"]
     word_cloud_data = dp.word_cloud_data_filter(sy, ey)
     artiest_index_data = dp.artiest_index_chart_data_filter(sy, ey, trip_tp)
-    return {"word_cloud": word_cloud_data, "at_index": artiest_index_data}
+    art_work_in_gallery = dp.filter_get_arts(sy, ey, trip_tp)
+    return {"word_cloud": word_cloud_data, "at_index": artiest_index_data, "gallery_arts": art_work_in_gallery}
 
 
 @app.route('/api/filter_word', methods=['POST'])

@@ -1,4 +1,4 @@
-let stack_chart_height = "300px";
+let stack_chart_height = "250px";
 // Get dom in html
 let stack_chart_dom = document.getElementById("echarts-stack");
 stack_chart_dom.style.height = stack_chart_height;
@@ -8,17 +8,17 @@ let stack_chart = echarts.init(stack_chart_dom);
 //--------------------Location--------------------
 let wid_stack_gene_chart = "88%";
 let lef_stack_gene_chart = "9%";
-let top_stack_gene_chart = "10";
-let hei_stack_gene_chart = 150;
+let top_stack_gene_chart = 20;
+let hei_stack_gene_chart = 130;
 
 let wid_stack_gene_legend = "88%";
 let lef_stack_gene_legend = "9%";
-let top_stack_gene_legend = 180;
+let top_stack_gene_legend = 190;
 let hei_stack_gene_legend = 10;
 
 let wid_stack_datazoom = "88%";
 let lef_stack_datazoom = "9%";
-let top_stack_datazoom = 210;
+let top_stack_datazoom = 220;
 let hei_stack_datazoom = 15;
 //----------------------Grid----------------------
 let grid_stack_gene_chart = {
@@ -166,15 +166,18 @@ stack_chart.on("datazoom", function(para){
 
                   let t_option = word_cloud_chart.getOption();
                   t_option.series[0].data = JSON.parse(t_data.word_cloud);
-                  word_cloud_chart.setOption(t_option);
+                  word_cloud_chart.setOption(t_option, true);
                   // console.log(JSON.parse(t_data.word_cloud));
 
                   t_option = artiest_index_chart.getOption();
                   artiest_index_chart_data = JSON.parse(t_data.at_index);
                   let t_series_list = to_artiest_index_series_list(artiest_index_chart_data, []);
                   t_option.series = t_series_list;
-                  artiest_index_chart.setOption(t_option);
+                  artiest_index_chart.setOption(t_option, true);
                   set_artiest_description(0);
+
+                  art_work_in_gallery = JSON.parse(t_data.gallery_arts);
+                  append_images();
               }
         };
     }, 3000);

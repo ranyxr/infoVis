@@ -104,7 +104,7 @@ There are five parts included in our project- a timeline of arts’ general type
     <div class="iv-div ">
 {#         align-items-center#}
         <div class="row no-gutters" >
-            <div id="chart" class="col-xl-8 col-lg-7" style="background-color: rgb(41, 41, 200);">
+            <div id="chart" class="col-xl-8 col-lg-7" style="background-color: rgb(46, 47, 51);">
                 <script type="text/javascript">
                 let stack_x_axis_data        = {{ stack_x_axis_data | safe }};
                 let stack_item_data          = {{ stack_item_data   | safe }};
@@ -112,34 +112,64 @@ There are five parts included in our project- a timeline of arts’ general type
                 let artiest_index_chart_data = {{ artiest_index_chart_data | safe}};
                 let art_work_in_gallery      = {{ art_work_in_gallery | safe }};
             </script>
-                <div class="echart row" id="logo_descr" style="background-color: blue;">
-            <div class="echart col-xl-1" id="logo" style="background-color: sandybrown;"></div>
-            <div class="echart col-xl-11" id="descr" style="background-color: rebeccapurple;">Logo Title Description</div>
-        </div>
+                <div class="echart row" id="logo_descr">
+                    <div class="echart col-xl-1" id="logo" >logo</div>
+                    <div class="echart col-xl-5" id="title" >Title</div>
+                    <div class="echart col-xl-6" id="descr" >Description</div>
+                </div>
+                <div>
+                    <p class="guide">
+                    Let's take a time machine to start artistic journey together!
+                    </p>
+                </div>
                 <div class="echart " id="echarts-stack" >Stack/Zoom bar/Legend</div>
                 {#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#}
-                <div class="echart" style="background-color: yellowgreen;">
+                <div class="echart" >
                     <div class="echart row" id="trip-button" style="">
                         <button class="echart col-sm-6 trip_btn" id="western-trip" >Western Trip</button>
-                        <button class="echart col-sm-6 trip_btn trip_btn_active" id="global-trip">Global View</button>
+                        <button class="echart col-sm-6 trip_btn trip_btn_active" id="global-trip">Global Trip</button>
                     </div>
                 </div>
+                <div>
+                    <p class="guide">
+                    Want to know western art history? Try it!
+                    </p>
+                </div>
                 <div class="echart " id="trip-description"></div>
-                <div class="echart row" style="background-color: darkblue;">
-            <div class="echart col-xl-6 col-lg-6 align-self-center"  id="echarts-tree" style="background-color: darkcyan;">Tree</div>
-            <div class="echart col-xl-6 col-lg-6 align-self-center" id="echarts-artiest-index" style="background-color: darkgreen;">Artiest Index</div>
+                <div>
+                    <p class="guide">
+                    Filter by artwork gene type or check this era's masters info.
+                    </p>
+                </div>
+                <div class="echart row">
+            <div class="echart col-xl-6 col-lg-6 align-self-center"  id="echarts-tree">Tree</div>
+            <div class="echart col-xl-6 col-lg-6 align-self-center" id="echarts-artiest-index">Artiest Index</div>
         </div>
-                <div class="echart row" id="echarts-artiest-intro" style="background-color: darkorchid;">
-            <div class="echart col-xl-8 col-lg-7" id="echarts-artiest-descr"  style="">Artiest Intro</div>
-            <object class="echart col-xl-4 col-lg-5" id="echarts-artiest-img" type="text/html" data="" style=""></object>
-        </div>
-                <div class="echart " id="echarts-word-cloud" style="overflow: visible; background-color: yellowgreen;">word cloud</div>
+                <div class="echart row" id="echarts-artiest-intro">
+                    <div class="echart col-xl-8 col-lg-7" id="" >
+                        <p id="echarts-artiest-descr">Artiest Intro</p>
+                    </div>
+                    <object class="echart col-xl-4 col-lg-5" id="echarts-artiest-img" type="text/html" data="" style=""></object>
+                </div>
+                <div>
+                    <p class="guide">
+                    Filter by description key words. (Not implemented yet, but you still can view this period's description key words)
+                    </p>
+                </div>
+                <div class="echart " id="echarts-word-cloud" style="overflow: visible;">word cloud</div>
 
                 {#<script src='./echarts-wordcloud.js'></script>#}
             </div>
 
-            <div id="gallery" class="echart col-xl-4 col-lg-5" style="width: 100%; background-color: rgb(56,89,219);">
+            <div id="gallery" class="echart col-xl-4 col-lg-5" style="width: 100%; background-color: rgb(41, 41, 45)">
                 <div id="inner-gallery">
+
+                <button class="echart" id = "refresh-btn" onclick="refresh_img()">Refresh</button>
+                    <div>
+                    <p class="guide">
+                        You can press refresh to get new different images!
+                    </p>
+                </div>
                     <div style="text-align:center">
                     <p id="art-title" style="display:none;">Click on the images below:</p>
                 </div>
@@ -167,14 +197,14 @@ There are five parts included in our project- a timeline of arts’ general type
                 </div>
                 </div>
             </div>
-            <script src="{{ url_for('static', filename = './gallery.js') }}"></script>
             <script src="{{ url_for('static', filename = './js/echarts-wordcloud.js') }}"></script>
-            <script src="{{ url_for('static', filename = './trip-button.js') }}"></script>
             <script src="{{ url_for('static', filename = './echarts-overall.js') }}"></script>
             <script src="{{ url_for('static', filename = './echarts-stack.js') }}"></script>
             <script src="{{ url_for('static', filename = './echarts-tree.js') }}"></script>
             <script src="{{ url_for('static', filename = './echarts-artiest-index.js') }}"></script>
             <script src="{{ url_for('static', filename = './echarts-word-cloud.js') }}"></script>
+            <script src="{{ url_for('static', filename = './trip-button.js') }}"></script>
+            <script src="{{ url_for('static', filename = './gallery.js') }}"></script>
         </div>
     </div>
 </section>
@@ -212,9 +242,9 @@ There are five parts included in our project- a timeline of arts’ general type
                         <h4 class="text-uppercase m-0">Group Members</h4>
                         <hr class="my-4">
                         <div class="small text-black-50">Kai Zhang Student ID: 12712469</div>
-                        <div class="small text-black-50">Kai Zhang</div>
-                        <div class="small text-black-50">Kai Zhang</div>
-                        <div class="small text-black-50">Kai Zhang</div>
+                        <div class="small text-black-50"></div>
+                        <div class="small text-black-50"></div>
+                        <div class="small text-black-50"></div>
                     </div>
                 </div>
             </div>

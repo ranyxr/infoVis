@@ -113,6 +113,17 @@ class DataProcessor:
             .limit(20) \
             .toPandas().to_json(orient='records')
 
+    def filter_get_arts(self, s_year, e_year, trip_type):
+        if trip_type == "west":
+            in_df = self.__data_western_art_df
+        else:
+            in_df = self.__data_all_art_df
+        return in_df.filter(col(COL.year).between(s_year, e_year)) \
+            .select(col(COL.i_url).alias(COL.src), col(COL.descri).alias(COL.alt), col(COL.ak_nm).alias(COL.name)) \
+            .orderBy(rand(random.seed())) \
+            .limit(20) \
+            .toPandas().to_json(orient='records')
+
     def filter_artiest(self, aritest):
         return self.__data_all_art_df.filter(col(COL.at_nm) == aritest)\
             .select(col(COL.i_url).alias(COL.src), col(COL.descri).alias(COL.alt), col(COL.ak_nm).alias(COL.name))\

@@ -25,7 +25,7 @@ global_btn.addEventListener("click", function () {
         trip_type = trip_type_g;
         stack_chart.dispatchAction({
             type: 'dataZoom',
-            startValue: 0,
+            startValue: 0.5,
             endValue:   100
         });
         let trip_description_dom = document.getElementById("trip-description");

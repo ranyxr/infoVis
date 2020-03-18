@@ -43,10 +43,29 @@ function append_images() {
         img.setAttribute("alt", art_work_in_gallery[line]["alt"]);
         img.setAttribute("name", art_work_in_gallery[line]["name"]);
         img.setAttribute("style", "width:100%");
-        img.setAttribute("onclick", "show_pic(this);")
+        img.setAttribute("onclick", "show_pic(this);");
+        img.setAttribute("onerror", "this.style.display='none'")
         img_div.appendChild(img)
         document.getElementsByClassName("gallery-row")[0].appendChild(img_div)
     }
+}
+
+function refresh_img(){
+
+        let XHR = new XMLHttpRequest();
+        let request_data = {"start_year": data_zoom_start, "end_year": data_zoom_end, "trip_type": trip_type};
+
+        XHR.open('POST', "/api/filter");
+        XHR.setRequestHeader('content-type', 'application/json');
+
+        XHR.send(JSON.stringify(request_data));
+        XHR.onreadystatechange = function(){
+              if(XHR.readyState === 4 && XHR.status === 200){
+                  let t_data = JSON.parse(XHR.responseText);
+                  art_work_in_gallery = JSON.parse(t_data.gallery_arts);
+                  append_images();
+              }
+        };
 }
 
 function resize(){
@@ -59,8 +78,9 @@ function resize(){
 
 function set_logo(){
   let logo_dom = document.getElementById("logo")
+  logo_dom.innerText = ""
   let logo_inner_div = document.createElement("DIV")
-  logo_inner_div.innerHTML = "<svg style=\"width:100%;height:100%;\"\n" +
+  logo_inner_div.innerHTML = "<svg class=\"align-self-center;\" style=\"width:100%;height:20px;vertical-align: center\"\n" +
       "   xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" +
       "   xmlns:cc=\"http://creativecommons.org/ns#\"\n" +
       "   xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
@@ -207,10 +227,36 @@ function set_logo(){
       "  </g>\n" +
       "</svg>";
   logo_inner_div.setAttribute("class", "align-self-center");
-  logo_inner_div.setAttribute("style", "height:100px");
+  // logo_inner_div.setAttribute("style", "height:100px");
   logo_dom.appendChild(logo_inner_div);
 
 }
 
-append_images()
-set_logo()
+function set_title(){
+  let title_dom = document.getElementById("title");
+  title_dom.setAttribute("style", "text-align:center; margin: auto auto; color: white; vertical-align: center");
+  title_dom.innerText = "";
+
+  let title_div = document.createElement("H1");
+  title_div.setAttribute("class", "align-self-center");
+  title_div.setAttribute("style", "margin:auto;line-height:51px; white-space: nowrap; color: white; vertical-align: center");
+  title_div.innerHTML = "Omni <span style='color: red'>Art</span> Explorer";
+  title_dom.appendChild(title_div);
+}
+
+function set_description(){
+  let descr_dom = document.getElementById("descr");
+  descr_dom.innerText = "";
+  descr_dom.setAttribute("style", "color: white;padding: px 10px;");
+
+  let descr_div = document.createElement("p");
+  descr_div.setAttribute("style", "font-size: 12px; color: #d5d4d4;");
+  descr_div.innerText = "Artwork is human being's treasure through out thousand of years. This viz explores artworks of the year since 0th centry to now through OmniArt dataset which is maintained by our UvA tutor Strezoski. Explore the wide array of genres through out different ages, we can see how is artwork type change and core idea of design idea in a period with a word cloud, and observe artworks filtered by artiest or its type during that period."
+  descr_dom.appendChild(descr_div)
+}
+
+append_images();
+set_logo();
+set_title();
+set_description();
+

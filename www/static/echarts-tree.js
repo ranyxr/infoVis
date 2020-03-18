@@ -6,7 +6,7 @@ chart_tree_dom.style.height = chart_tree_height;
 let chart_tree_chart = echarts.init(chart_tree_dom);
 //----------------------Data----------------------
 let tree_data                          = [{
-    "name": "root",
+    "name": "",
     "children": [
         {
             "name": "photograph",
@@ -175,7 +175,7 @@ let tree_series = {
     orient: 'vertical',
     initialTreeDepth: 1,
     data: tree_data,
-
+    color: "#eee",
     top: top_tree_series,
     bottom: bot_tree_series,
     left: lef_tree_series,
@@ -194,7 +194,7 @@ let tree_series = {
             position: 'bottom',
             rotate: -60,
             verticalAlign: 'middle',
-            align: 'left'
+            align: 'left',
         }
     },
     expandAndCollapse: true,

@@ -68,18 +68,7 @@ let western_trip_data = [
         description: "Contemporary art is the art of today, produced in the second half of the 20th century or in the 21st century. Contemporary artists work in a globally influenced, culturally diverse, and technologically advancing world. Their art is a dynamic combination of materials, methods, concepts, and subjects that continue the challenging of boundaries that was already well underway in the 20th century. Diverse and eclectic, contemporary art as a whole is distinguished by the very lack of a uniform, organising principle, ideology, or \"-ism\". Contemporary art is part of a cultural dialogue that concerns larger contextual frameworks such as personal and cultural identity, family, community, and nationality."
     }
 ];
-let eastern_trip_markline = {
-    type: 'bar',
-    name: 'Important dates',
-    stack: 'one',
-    barCategoryGap: 0,
-    barGap: 0,
-    emphasis: [],
-    data: [],
-    markLine: {
-        data : eastern_trip_data
-    }
-};
+
 let western_trip_markline = {
     type: 'bar',
     name: 'western',
