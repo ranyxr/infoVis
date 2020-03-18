@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Omiart</title>
+
+    <!-- Bootstrap core CSS -->
+    {#  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">#}
+    <link href="{{ url_for('static', filename = './vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    {#  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">#}
+    <link href="{{ url_for('static', filename = './vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename = './gallery.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    {#  <link href="css/grayscale.min.css" rel="stylesheet">#}
+    <link href="{{ url_for('static', filename = './css/grayscale.min.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+</head>
+
+<body id="page-top" onload="" onresize="resize()">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        {#      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="img/logo.svg" alt="Homepage"></a>#}
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img
+                src="{{ url_for('static', filename = './img/logo.svg') }}" alt="Homepage"></a>
+        {#    <link href="{{ url_for('static', filename = './img/logo.svg') }}" rel="stylesheet">#}
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#chart">Chart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#gallery">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#signup">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header -->
+<header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+            <h1 class="mx-auto my-0 text-uppercase">OmniArt</h1>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5">The Only Artistic Dataset You Will Ever Need!</h2>
+            <a href="#about" class="btn btn-primary js-scroll-trigger">Let's explore!</a>
+        </div>
+    </div>
+</header>
+
+<!-- About Section -->
+<section id="about" class="about-section text-center">
+    <div class="container" class="container d-flex h-100 align-items-center">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-white mb-4">Introduction</h2>
+                <p class="text-white-50 text-left">
+There are five parts included in our project- a timeline of arts’ general types, a tree of arts’ types and objects, a word cloud of their key words, a list for masterpieces, and also, a gallery to present the arts to users.
+<br><strong><em>The timeline:</em></strong> We design a timeline to describe the relationship between the centuries when the arts were created and the types of them. On this time line, we can click on it to look for more details of the periods we selected, zoom in and out to see it more clearly , and select the periods to get more information in the parts of tree, word cloud and masterpieces.
+<br><strong><em>The tree:</em></strong> The tree is designed to make our users get more information about the types and objects of the arts in the period they selected from the timeline.
+<br><strong><em>The word cloud:</em></strong> From the word cloud parts, users will get detailed description of the arts from the periods they selected, and when they click on the words, the webpage of the word will appear to tell more details about them.
+<br><strong><em>The list:</em></strong> Here we present a list to make users know the most famous artists of the period they selected.
+<br><strong><em>The gallery:</em></strong> In this gallery, uses can see the arts directly from their desired periods.</p>
+            </div>
+        </div>
+        {#      <img src="img/omniart.jpg" class="img-fluid" alt="" style="padding: 50px; margin: 0px;">#}
+        <img src="{{ url_for('static', filename = './img/omniart.jpg') }}" class="img-fluid" alt=""
+             style="padding: 50px; margin: 0px;">
+        {#        {{ url_for('static', filename = './img/logo.svg') }}      #}
+    </div>
+</section>
+
+<!-- Projects Section -->
+<!-- rgb(46, 47, 51) -->
+<!-- rgb(41, 41, 45) -->
+<section class="echart bg-light" id="chart-gallery" style="">
+    <div class="iv-div ">
+{#         align-items-center#}
+        <div class="row no-gutters" >
+            <div id="chart" class="col-xl-8 col-lg-7" style="background-color: rgb(46, 47, 51);">
+                <script type="text/javascript">
+                let stack_x_axis_data        = {{ stack_x_axis_data | safe }};
+                let stack_item_data          = {{ stack_item_data   | safe }};
+                let word_cloud_chart_data    = {{ word_cloud_chart_data   | safe }};
+                let artiest_index_chart_data = {{ artiest_index_chart_data | safe}};
+                let art_work_in_gallery      = {{ art_work_in_gallery | safe }};
+            </script>
+                <div class="echart row" id="logo_descr">
+                    <div class="echart col-xl-1" id="logo" >logo</div>
+                    <div class="echart col-xl-5" id="title" >Title</div>
+                    <div class="echart col-xl-6" id="descr" >Description</div>
+                </div>
+                <div>
+                    <p class="guide">
+                    Let's take a time machine to start artistic journey together!
+                    </p>
+                </div>
+                <div class="echart " id="echarts-stack" >Stack/Zoom bar/Legend</div>
+                {#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#}
+                <div class="echart" >
+                    <div class="echart row" id="trip-button" style="">
+                        <button class="echart col-sm-6 trip_btn" id="western-trip" >Western Trip</button>
+                        <button class="echart col-sm-6 trip_btn trip_btn_active" id="global-trip">Global Trip</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="guide">
+                    Want to know western art history? Try it!
+                    </p>
+                </div>
+                <div class="echart " id="trip-description"></div>
+                <div>
+                    <p class="guide">
+                    Filter by artwork gene type or check this era's masters info.
+                    </p>
+                </div>
+                <div class="echart row">
+            <div class="echart col-xl-6 col-lg-6 align-self-center"  id="echarts-tree">Tree</div>
+            <div class="echart col-xl-6 col-lg-6 align-self-center" id="echarts-artiest-index">Artiest Index</div>
+        </div>
+                <div class="echart row" id="echarts-artiest-intro">
+                    <div class="echart col-xl-8 col-lg-7" id="" >
+                        <p id="echarts-artiest-descr">Artiest Intro</p>
+                    </div>
+                    <object class="echart col-xl-4 col-lg-5" id="echarts-artiest-img" type="text/html" data="" style=""></object>
+                </div>
+                <div>
+                    <p class="guide">
+                    Filter by description key words. (Not implemented yet, but you still can view this period's description key words)
+                    </p>
+                </div>
+                <div class="echart " id="echarts-word-cloud" style="overflow: visible;">word cloud</div>
+
+                {#<script src='./echarts-wordcloud.js'></script>#}
+            </div>
+
+            <div id="gallery" class="echart col-xl-4 col-lg-5" style="width: 100%; background-color: rgb(41, 41, 45)">
+                <div id="inner-gallery">
+
+                <button class="echart" id = "refresh-btn" onclick="refresh_img()">Refresh</button>
+                    <div>
+                    <p class="guide">
+                        You can press refresh to get new different images!
+                    </p>
+                </div>
+                    <div style="text-align:center">
+                    <p id="art-title" style="display:none;">Click on the images below:</p>
+                </div>
+                    <div class="gallery-row">
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_nature.jpg" alt = "describe 1" name="Nature" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_snow.jpg" alt = "describe 2" name="Snow" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_mountains.jpg" alt = "describe 3" name="Mountains" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 4" name="Lights" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                        <div class="gallery-column">
+                            <img src="https://www.w3schools.com/howto/img_lights.jpg" alt = "describe 5" name="Lights" style="width:100%" onclick="show_pic(this);">
+                        </div>
+                    </div>
+                    <div class="gallery-container">
+                    <span onclick="hide_pic(this);" class="gallery-closebtn">&times;</span>
+                    <img id="gallery-show-image" style="width:100%;">
+                    <p id="gallery-description" style="display:none;"></p>
+                </div>
+                </div>
+            </div>
+            <script src="{{ url_for('static', filename = './js/echarts-wordcloud.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-overall.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-stack.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-tree.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-artiest-index.js') }}"></script>
+            <script src="{{ url_for('static', filename = './echarts-word-cloud.js') }}"></script>
+            <script src="{{ url_for('static', filename = './trip-button.js') }}"></script>
+            <script src="{{ url_for('static', filename = './gallery.js') }}"></script>
+        </div>
+    </div>
+</section>
+
+<!-- Signup Section -->
+<section id="signup" class="signup-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
+
+                <form class="form-inline d-flex">
+                    <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail"
+                           placeholder="Enter email address...">
+                    <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section bg-black">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="far fa-address-card text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Group Members</h4>
+                        <hr class="my-4">
+                        <div class="small text-black-50">张开 Kai Zhang, Student ID: 12712469</div>
+                        <div class="small text-black-50">杨信然 Xinran Yang, Student ID: 12547425</div>
+                        <div class="small text-black-50">韩富同 Futong Han, Student ID: 12581135</div>
+                        <div class="small text-black-50">童楚仪 Chuyi Tong, Student ID: 12663131</div>
+                        <div class="small text-black-50">徐桂静 Guijing Xu, Student ID: 12946346</div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Email</h4>
+                        <hr class="my-4">
+                        <div class="small text-black-50">
+                            <a href="mailto:mail@kai.sh">Kai Zhang: mail@kai.sh</a><br>
+                            <a href="mailto:ryanyxr@gmail.com">Xinran Yang: ryanyxr@gmail.com</a><br>
+                            <a href="mailto:hanfutong0804@gmail.com">Futong Han: hanfutong0804@gmail.com</a><br>
+                            <a href="mailto:c.tong@student.vu.nl">Chuyi Tong: c.tong@student.vu.nl</a><br>
+                            <a href="mailto:xuguijing221@gmail.com">Guijing Xu: xuguijing221@gmail.com</a><br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fab fa-github text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Github</h4>
+                        <hr class="my-4">
+                        <div class="small text-black-50">
+                            <a href="https://github.com/ranyxr/infoVis" class="mx-2">Github Repository</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black small text-center text-white-50">
+    <div class="container">
+        Copyright &copy; Information Visualization 2020 VizTeam 36
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+{#  <script src="vendor/jquery/jquery.min.js"></script>#}
+{#  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>#}
+<script src="{{ url_for('static', filename = './vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename = './vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Plugin JavaScript -->
+{#  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>#}
+<script src="{{ url_for('static', filename = './vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<!-- Custom scripts for this template -->
+{#  <script src="js/grayscale.min.js"></script>#}
+<script src="{{ url_for('static', filename = './js/grayscale.min.js') }}"></script>
+
+</body>
+</html>

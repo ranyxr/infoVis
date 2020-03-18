@@ -1,0 +1,111 @@
+/* Style the buttons */
+.trip_btn {
+    border: none;
+    outline: none;
+    background-color: #606060;
+    cursor: pointer;
+    font-size: 18px;
+    color: #8d8c8c;
+}
+/* Style the active class, and buttons on mouse-over */
+.trip_btn_active {
+    background-color: rgb(61, 133, 17);
+    color: #dae2d5;
+}
+.trip_btn:hover {
+    background-color: rgb(61, 167, 17);
+    color: #dae2d5;
+}
+.iv-div{
+    margin: 0;
+    padding: 0;
+}
+.echart{
+    margin: 0;
+    padding: 0;
+}
+#inner-gallery{
+    position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  /*font-size: 20px;*/
+}
+/** {*/
+  /*box-sizing: border-box;*/
+/*}*/
+
+/* The grid: Four equal gallery-columns that floats next to each other */
+.gallery-column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.gallery-column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.gallery-column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the gallery-columns */
+.gallery-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image gallery-container */
+.gallery-container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#art_title_dom {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: #b9b8b8;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.gallery-closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #b9b8b8;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+#logo_descr, #trip-description, #echarts-artiest-intro{
+    border-style: none none dashed none;
+    border-color: #464447;
+    font-size: 10px;
+}
+
+#trip-description, #echarts-artiest-descr, #echarts-artiest-descr, #gallery-row, #inner-gallery{
+    padding: 15px;
+    padding-top: 5px;
+    /*margin:15px;*/
+    color: #d5d4d4;
+    font-size: 15px;
+}
+#echarts-word-cloud{
+    margin: 15px;
+}
+.guide{
+    margin: 0px;
+    color: #5c5b5b;
+    font-size: 12px;
+    text-align: center;
+}
+
+#refresh-btn{
+    width: 100%; background-color: rgb(43,109,110); height: 25px; color: #d5d4d4;
+}

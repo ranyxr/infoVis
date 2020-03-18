@@ -21,5 +21,18 @@ pic_info_uri = _reproductions_uri
 cleaned_data1_fnm = DIR.clean_data1
 cleaned_data1_uri = DIR.clean_data1
 
+cleaned_data2_fnm = DIR.clean_data2
+cleaned_data2_uri = DIR.clean_data2
+
 word_cloud_data1_fnm = DIR.word_cloud_data1
 word_cloud_data1_uri = DIR.word_cloud_data1
+
+word_cloud_data2_fnm = DIR.word_cloud_data2
+word_cloud_data2_uri = DIR.word_cloud_data2
+
+result_stack_data_uri = DIR.result_stack_data
+result_stack_x_axis_uri = DIR.result_stack_x_axis
+result_stack_art_type_uri = DIR.result_stack_art_type
+result_word_cloud_uri = DIR.result_word_cloud
+
+artiest_json_dir_uri = os.path.join(DIR.artiest_json_dir, "artists.json")
