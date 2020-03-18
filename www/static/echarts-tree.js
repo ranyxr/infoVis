@@ -214,3 +214,28 @@ if (chart_tree_option && typeof chart_tree_option === "object") {
      chart_tree_chart.setOption(chart_tree_option, true);
 }
 
+chart_tree_chart.on("click", function(param){
+    let XHR = new XMLHttpRequest();
+    console.log(param);
+    let level_flag = false;
+    if (!("children" in param.data)){
+        level_flag = true;
+    }
+    // only filter leaves in tree
+    let request_data = {"art_type": param.data.name, 'level_flag': level_flag};
+    console.log(request_data);
+
+    XHR.open('POST', "http://127.0.0.1:5000/api/filter_type");
+    XHR.setRequestHeader('content-type', 'application/json');
+
+    XHR.send(JSON.stringify(request_data));
+    XHR.onreadystatechange = function(){
+          if(XHR.readyState === 4 && XHR.status === 200){
+              let t_data = JSON.parse(XHR.responseText);
+              console.log(t_data);
+              art_work_in_gallery = t_data;
+              append_images();
+          }
+    };
+});
+

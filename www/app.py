@@ -51,7 +51,12 @@ def filter_word():
 
 @app.route('/api/filter_type', methods=['POST'])
 def filter_type():
-    raise NotImplementedError
+    rd = request.get_json()
+    artwork_type = rd['art_type']
+    level_flag = rd['level_flag']
+    if level_flag:
+        return dp.filter_artwork_type(artwork_type)
+    return 'Should be leaves in the tree'
 
 
 @app.route('/api/filter_artiest', methods=['POST'])

@@ -131,6 +131,13 @@ class DataProcessor:
             .limit(20)\
             .toPandas().to_json(orient='records')
 
+    def filter_artwork_type(self, art_type):
+        return self.__data_all_art_df.filter(col(COL.l3_type) == art_type)\
+            .select(col(COL.i_url).alias(COL.src), col(COL.descri).alias(COL.alt), col(COL.ak_nm).alias(COL.name))\
+            .orderBy(rand(random.seed()))\
+            .limit(20)\
+            .toPandas().to_json(orient='records')
+
     def filter_word(self, s_year, e_year, word):
         o_id_list = self.__word_cloud_df\
             .filter(col(COL.year).between(s_year, e_year)).filter(col(COL.name) == word)\

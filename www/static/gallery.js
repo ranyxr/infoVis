@@ -10,7 +10,11 @@ function show_pic(imgs) {
   //Load img gallery-description
   var gallery_description_dom = document.getElementById("gallery-description");
   gallery_description_dom.style.display=''
-  gallery_description_dom.innerText = imgs.alt;
+    if (!(imgs.alt === null)){
+        gallery_description_dom.innerText = '';
+    } else {
+        gallery_description_dom.innerText = imgs.alt;
+    }
   //Hide unchoosen pics
   var x = document.getElementsByClassName("gallery-column");
   var i;
