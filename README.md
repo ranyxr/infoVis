@@ -6,6 +6,21 @@ Project for Information Visualization
 ## Live Demo
 http://66.112.220.167:5000/
 
+## Usage
+__Pre-requirements:__ Python3.7, Java 8
+```
+pip install -r requirements.txt
+cd www
+export FLASK_APP=app.py
+flask run
+```
+
+# Database Introduction
+http://isis-data.science.uva.nl/strezoski/#2
+
+# Database dataset
+http://isis-data.science.uva.nl/strezoski/omniart/omniart_v3/
+
 ## Team members
 |Name       |Student ID (UvA)|Student Email|
 |-----------|----------------|-------------|
@@ -15,8 +30,4 @@ http://66.112.220.167:5000/
 |Futong Han |12581135        |hanfutong0804@gmail.com             | 
 |Kai Zhang  |12712469        |mail@kai.sh             |
 
-# Database Introduction
-http://isis-data.science.uva.nl/strezoski/#2
 
-# Database dataset
-http://isis-data.science.uva.nl/strezoski/omniart/omniart_v3/
