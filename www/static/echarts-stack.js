@@ -156,7 +156,7 @@ stack_chart.on("datazoom", function(para){
         let XHR = new XMLHttpRequest();
         let request_data = {"start_year": temp_s, "end_year": temp_e, "trip_type": trip_type};
 
-        XHR.open('POST', "http://127.0.0.1:5000/api/filter");
+        XHR.open('POST', "/api/filter");
         XHR.setRequestHeader('content-type', 'application/json');
 
         XHR.send(JSON.stringify(request_data));

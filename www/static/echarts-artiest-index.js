@@ -90,7 +90,7 @@ artiest_index_chart.on("click", function(param){
         let XHR = new XMLHttpRequest();
         let request_data = {"artiest": artiest_index_chart_data[param.seriesIndex].name};
 
-        XHR.open('POST', "http://127.0.0.1:5000/api/filter_artiest");
+        XHR.open('POST', "/api/filter_artiest");
         XHR.setRequestHeader('content-type', 'application/json');
 
         XHR.send(JSON.stringify(request_data));

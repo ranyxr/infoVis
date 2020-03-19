@@ -225,7 +225,7 @@ chart_tree_chart.on("click", function(param){
     let request_data = {"art_type": param.data.name, 'level_flag': level_flag};
     console.log(request_data);
 
-    XHR.open('POST', "http://127.0.0.1:5000/api/filter_type");
+    XHR.open('POST', "/api/filter_type");
     XHR.setRequestHeader('content-type', 'application/json');
 
     XHR.send(JSON.stringify(request_data));
