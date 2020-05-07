@@ -3,8 +3,8 @@
 Project for Information Visualization
 ![Image](Document/image/screenshot.png)
 
-## Live Demo
-http://66.112.220.167:5000/
+## Virtualization Report
+[Project Report](Document/36_Team_Report-final.pdf)
 
 ## Team members
 |Name       |Student ID (UvA)|Student Email|
